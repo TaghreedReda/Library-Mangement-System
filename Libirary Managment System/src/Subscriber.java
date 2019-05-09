@@ -8,14 +8,15 @@ public  abstract class Subscriber
     public String address,phone, email ;
 	private String Password ;
 	
-	public void borrowContent() 
-	{
+	public void browse() {
 		
 	}
-	public void returnContent()  
-	{
+	public  void borrowContent(int id) {
 		
 	}
+	
+	public abstract void returnContent()  ;
+	
 	public int checkBalance() 
 	{
 		return  balance;
@@ -36,7 +37,7 @@ public  abstract class Subscriber
 	      this.content.attach(this);	
 	}
 	 @Override
-	public void borrowContent() 
+	public void borrowContent(int id) 
 	{
 		
 	}
@@ -71,7 +72,7 @@ public  abstract class Subscriber
 	      this.content.attach(this);	
 	}
 	 @Override
-	public void borrowContent() 
+	public void borrowContent(int id) 
 	{
 		
 	}

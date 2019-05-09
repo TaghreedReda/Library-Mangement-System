@@ -5,5 +5,10 @@ public class Library {
 
 	public int ID ;
 	public String name ,address;
-	private List<Content> libraryContents = new ArrayList<Content>();
+	public List<Content> libraryContents = new ArrayList<Content>();
+	
+	public void showContent () {
+		
+	}
+	
 }

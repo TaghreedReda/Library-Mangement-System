@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 class ContentFactory {
 
@@ -9,7 +8,7 @@ class ContentFactory {
 		 {
 	         return new Book ();
 	      }
-		 else if(contentType == "Jornal")
+		 else if(contentType == "Journal")
 		 {
 	         return new Journal();
 	      }
