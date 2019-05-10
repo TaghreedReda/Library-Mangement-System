@@ -1,11 +1,12 @@
 
 public interface State {
 	public void doAction(Content context);
+	public String toString();
 }
 class OnShelf implements State {
 	
 	public void doAction(Content context) {
-	      System.out.println("Content is in OnShelf");
+	    //  System.out.println("Content is in OnShelf");
 	      context.setState(this);	
 	   }
 
@@ -16,7 +17,7 @@ class OnShelf implements State {
 
 class Borrowed implements State {
 	public void doAction(Content context) {
-	      System.out.println("Content is Borrowed");
+	     // System.out.println("Content is Borrowed");
 	      context.setState(this);	
 	   }
 

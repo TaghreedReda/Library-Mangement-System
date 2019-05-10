@@ -3,8 +3,8 @@ import java.util.List;
 
 public class Library {
 
-	public int ID ;
-	public String name ,address;
+ 
+	public String name ,address,ID ;
 	public List<Content> libraryContents = new ArrayList<Content>();
 	
 	public void showContent () {

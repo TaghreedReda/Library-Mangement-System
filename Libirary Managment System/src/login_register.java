@@ -29,10 +29,14 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Button;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.Dialog.ModalExclusionType;
+import java.awt.Window.Type;
 
 public class login_register {
 
-	private JFrame frame;
+	private JFrame frmLibrariesManagmentSystem;
 
 	/**
 	 * Launch the application.
@@ -42,7 +46,7 @@ public class login_register {
 			public void run() {
 				try {
 					login_register window = new login_register();
-					window.frame.setVisible(true);
+					window.frmLibrariesManagmentSystem.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,81 +65,102 @@ public class login_register {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 613, 472);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[][][][][][][][][][][][][grow][][][][][][][][][][][][grow][][][][][][][][][][]", "[][][][][][][][][][][][][][]"));
 		
-		JLabel lblContents = new JLabel("Browse Contents :");
-		lblContents.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblContents.setForeground(new Color(0, 0, 128));
-		frame.getContentPane().add(lblContents, "cell 1 0");
+		frmLibrariesManagmentSystem = new JFrame();
+		frmLibrariesManagmentSystem.setType(Type.UTILITY);
+		frmLibrariesManagmentSystem.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+		frmLibrariesManagmentSystem.setTitle("Libraries Managment System");
+		frmLibrariesManagmentSystem.setResizable(false);
+		frmLibrariesManagmentSystem.setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\SOMETHINGS\\icons\\Raindropmemory-Laboratory-Book.ico"));
+		frmLibrariesManagmentSystem.setForeground(new Color(255, 255, 0));
+		frmLibrariesManagmentSystem.getContentPane().setBackground(new Color(0, 0, 102));
+		frmLibrariesManagmentSystem.setBounds(100, 100, 781, 553);
+		frmLibrariesManagmentSystem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Button button = new Button("Admin");
-		button.setBackground(new Color(248, 248, 255));
-		button.setForeground(new Color(0, 0, 255));
-		button.setFont(new Font("Ravie", Font.BOLD, 16));
-		frame.getContentPane().add(button, "cell 31 0,alignx right,growy");
-		
-		JLabel lblBooks = new JLabel("Books");
-		lblBooks.setForeground(new Color(0, 0, 139));
-		lblBooks.setFont(new Font("Tahoma", Font.BOLD, 22));
-		frame.getContentPane().add(lblBooks, "cell 1 2,alignx center");
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setEditable(true);
-		comboBox.setBackground(new Color(255, 255, 255));
-		frame.getContentPane().add(comboBox, "cell 2 2 23 1,growx");
-		
-		JButton btnBorrow = new JButton("Borrow");
-		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnBorrow.setForeground(new Color(0, 0, 128));
-		frame.getContentPane().add(btnBorrow, "cell 31 2");
-		
-		JLabel lblJournals = new JLabel("Journals");
-		lblJournals.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblJournals.setForeground(new Color(0, 0, 128));
-		frame.getContentPane().add(lblJournals, "cell 1 5,alignx center,aligny center");
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setEditable(true);
-		comboBox_1.setBackground(Color.WHITE);
-		frame.getContentPane().add(comboBox_1, "cell 3 5 22 1,growx");
-		
-		JButton button_1 = new JButton("Borrow");
-		button_1.setForeground(new Color(0, 0, 128));
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		frame.getContentPane().add(button_1, "cell 31 5");
-		
-		JLabel lblDigitalMedia = new JLabel("Digital Media");
-		lblDigitalMedia.setForeground(new Color(0, 0, 128));
-		lblDigitalMedia.setFont(new Font("Tahoma", Font.BOLD, 21));
-		frame.getContentPane().add(lblDigitalMedia, "cell 1 8,alignx center,aligny center");
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setEditable(true);
-		comboBox_2.setBackground(Color.WHITE);
-		frame.getContentPane().add(comboBox_2, "cell 3 8 22 1,growx");
-		
-		JButton button_2 = new JButton("Borrow");
-		button_2.setForeground(new Color(0, 0, 128));
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		frame.getContentPane().add(button_2, "cell 31 8");
-		
-		JButton btnReturnBorrowed = new JButton("Return \r\nBorrowed");
-		btnReturnBorrowed.setBackground(new Color(248, 248, 255));
-		btnReturnBorrowed.setForeground(new Color(0, 0, 255));
-		btnReturnBorrowed.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnReturnBorrowed.addActionListener(new ActionListener() {
+		button.setBounds(685, 24, 57, 26);
+		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frmLibrariesManagmentSystem.dispose();
+				AdminControl adminp=new AdminControl();
+				adminp.setVisible(true);
 			}
 		});
+		frmLibrariesManagmentSystem.getContentPane().setLayout(null);
+		button.setBackground(new Color(248, 248, 255));
+		button.setForeground(new Color(0, 0, 0));
+		button.setFont(new Font("Ravie", Font.BOLD, 15));
+		frmLibrariesManagmentSystem.getContentPane().add(button);
+		
+		JLabel lblBooks = new JLabel("Books");
+		lblBooks.setBounds(71, 127, 64, 26);
+		lblBooks.setForeground(new Color(255, 255, 0));
+		lblBooks.setFont(new Font("Tahoma", Font.BOLD, 21));
+		frmLibrariesManagmentSystem.getContentPane().add(lblBooks);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(253, 132, 250, 22);
+		comboBox.setEditable(true);
+		comboBox.setBackground(new Color(255, 255, 255));
+		frmLibrariesManagmentSystem.getContentPane().add(comboBox);
+		
+		JButton btnBorrow = new JButton("Borrow");
+		btnBorrow.setBounds(616, 128, 114, 25);
+		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnBorrow.setForeground(new Color(0, 0, 128));
+		frmLibrariesManagmentSystem.getContentPane().add(btnBorrow);
+		
+		JLabel lblJournals = new JLabel("Journals");
+		lblJournals.setBounds(62, 228, 89, 26);
+		lblJournals.setFont(new Font("Tahoma", Font.BOLD, 21));
+		lblJournals.setForeground(new Color(255, 255, 0));
+		frmLibrariesManagmentSystem.getContentPane().add(lblJournals);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(253, 233, 250, 22);
+		comboBox_1.setEditable(true);
+		comboBox_1.setBackground(Color.WHITE);
+		frmLibrariesManagmentSystem.getContentPane().add(comboBox_1);
+		
+		JButton button_1 = new JButton("Borrow");
+		button_1.setBounds(616, 232, 114, 25);
+		button_1.setForeground(new Color(0, 0, 128));
+		button_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		frmLibrariesManagmentSystem.getContentPane().add(button_1);
+		
+		JLabel lblDigitalMedia = new JLabel("Digital Media");
+		lblDigitalMedia.setBounds(61, 334, 138, 26);
+		lblDigitalMedia.setForeground(new Color(255, 255, 0));
+		lblDigitalMedia.setFont(new Font("Tahoma", Font.BOLD, 21));
+		frmLibrariesManagmentSystem.getContentPane().add(lblDigitalMedia);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(253, 339, 250, 22);
+		comboBox_2.setEditable(true);
+		comboBox_2.setBackground(Color.WHITE);
+		frmLibrariesManagmentSystem.getContentPane().add(comboBox_2);
+		
+		JButton button_2 = new JButton("Borrow");
+		button_2.setBounds(616, 338, 114, 25);
+		button_2.setForeground(new Color(0, 0, 128));
+		button_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+		frmLibrariesManagmentSystem.getContentPane().add(button_2);
+		
+		JButton btnReturnBorrowed = new JButton("Return Borrowed");
+		btnReturnBorrowed.setBounds(39, 440, 175, 27);
+		btnReturnBorrowed.setFont(new Font("Tahoma", Font.BOLD, 15));
+		frmLibrariesManagmentSystem.getContentPane().add(btnReturnBorrowed);
 		
 		JButton btnCheckBalance = new JButton("Check Balance");
+		btnCheckBalance.setBounds(313, 440, 161, 27);
 		btnCheckBalance.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnCheckBalance.setForeground(new Color(0, 0, 255));
-		frame.getContentPane().add(btnCheckBalance, "cell 24 12,alignx center");
-		frame.getContentPane().add(btnReturnBorrowed, "cell 24 13");
+		btnCheckBalance.setForeground(Color.BLACK);
+		frmLibrariesManagmentSystem.getContentPane().add(btnCheckBalance);
+		
+		JButton btnCheckNotifications = new JButton("Check Notifications");
+		btnCheckNotifications.setBounds(541, 440, 201, 27);
+		btnCheckNotifications.setFont(new Font("Tahoma", Font.BOLD, 15));
+		frmLibrariesManagmentSystem.getContentPane().add(btnCheckNotifications);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {

@@ -25,8 +25,8 @@ abstract class Content {
 	private  State state ;
 	private List<Subscriber> Subscribers = new ArrayList<Subscriber>();
 	
-	public String title ,author,Publisher,category;	
-	public  int id, libID , ProductionYear ,copies;
+	public String title ,author,Publisher,category,id, libID , ProductionYear;
+	public  int  copies;
 	
 	//for state pattern
 	public   Content () {

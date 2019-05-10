@@ -2,11 +2,10 @@ import java.sql.Date;
 public  abstract class Subscriber
 {
 
-	public Date  borrowDate , returnDate ;
-	public  int fee , ID , balance;
+	public  int fee , balance;
 	protected  Content content;
-    public String address,phone, email ;
-	private String Password ;
+    public String address,phone, email,ID ;
+	//private String Password ;
 	
 	public void browse() {
 		
@@ -15,7 +14,9 @@ public  abstract class Subscriber
 		
 	}
 	
-	public abstract void returnContent()  ;
+	public void returnContent() {
+		
+	}
 	
 	public int checkBalance() 
 	{
@@ -24,13 +25,16 @@ public  abstract class Subscriber
 	public abstract String getType();
 	
 	// for observer pattern
-	public abstract void update ();
-
-
+	public void update () {
+		
+	}
 }
  class GoldenSubscriber extends Subscriber
 {
-
+   public GoldenSubscriber() {
+	   
+   }
+	 
 	public GoldenSubscriber ( Content content ) 
 	{
 		this.content = content;
@@ -65,6 +69,9 @@ public  abstract class Subscriber
 }
  class RegularSubscriber extends Subscriber
 {
+	public RegularSubscriber(){
+		 
+	 }
 
 	public RegularSubscriber ( Content content ) 
 	{
