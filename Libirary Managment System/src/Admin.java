@@ -46,6 +46,7 @@ public class Admin {
 		
 		
 		// hy3ml add fl file hna l kol attributes bta3t el content 
+		
 	}
 	public void editContent(String contID,String category,String title ,String author, String Publisher,String libID ,
 			String ProductionYear ,String copies)

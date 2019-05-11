@@ -297,10 +297,7 @@ JComboBox comboBox = new JComboBox();
 		back.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				login_register ln= new login_register();
-				//ln.setVisible(true);
-				contentPane.disable();
-			//	frmLibrariesManagmentSystem.setVisible(true);
+				
 			}
 		});
 		back.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -350,7 +347,7 @@ JComboBox comboBox = new JComboBox();
 		lblSubscriberId.setBounds(560, 235, 96, 16);
 		contentPane.add(lblSubscriberId);
 		
-		brSUBid = new JTextField();
+		JTextField brSUBid = new JTextField();
 		brSUBid.setColumns(10);
 		brSUBid.setBounds(560, 259, 116, 22);
 		contentPane.add(brSUBid);
@@ -361,7 +358,7 @@ JComboBox comboBox = new JComboBox();
 		label_1.setBounds(560, 286, 75, 16);
 		contentPane.add(label_1);
 		
-		brItemID = new JTextField();
+		JTextField brItemID = new JTextField();
 		brItemID.setColumns(10);
 		brItemID.setBounds(558, 304, 118, 22);
 		contentPane.add(brItemID);
@@ -372,7 +369,7 @@ JComboBox comboBox = new JComboBox();
 		lblFee.setBounds(560, 328, 75, 16);
 		contentPane.add(lblFee);
 		
-		fee = new JTextField();
+		JTextField fee = new JTextField();
 		fee.setColumns(10);
 		fee.setBounds(560, 350, 116, 22);
 		contentPane.add(fee);
@@ -383,7 +380,7 @@ JComboBox comboBox = new JComboBox();
 		lblBorrowingDate.setBounds(560, 371, 116, 16);
 		contentPane.add(lblBorrowingDate);
 		
-		brDate = new JTextField();
+		JTextField brDate = new JTextField();
 		brDate.setColumns(10);
 		brDate.setBounds(560, 390, 116, 22);
 		contentPane.add(brDate);
@@ -394,7 +391,7 @@ JComboBox comboBox = new JComboBox();
 		lblDate.setBounds(560, 418, 116, 16);
 		contentPane.add(lblDate);
 		
-		retDate = new JTextField();
+		JTextField retDate = new JTextField();
 		retDate.setColumns(10);
 		retDate.setBounds(560, 439, 116, 22);
 		contentPane.add(retDate);
@@ -413,6 +410,7 @@ JComboBox comboBox = new JComboBox();
 		Admin admin= new Admin();
 		String category = comboBox.getSelectedItem().toString();
 		String type =comboBox_1.getSelectedItem().toString();
+		BorrowingRecord borrowingRec =new BorrowingRecord();
 		
 		rdbtnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -473,6 +471,13 @@ JComboBox comboBox = new JComboBox();
 				 				admin.editSubscriber(subadd.getText(), subphone.getText(), subemail.getText(), subID.getText(), subBalance.getText(), type);
 				 			}
 			 		}
+			 		
+			 		/*try {
+						borrowingRec.calculateFee(brSUBid.getText(), brDate.getText() ,retDate.getText());
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}*/
 			 	}
 			 });
 	}

@@ -1,42 +1,29 @@
+import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
-import java.awt.Label;
-import java.awt.Scrollbar;
-import java.awt.List;
-import java.awt.ScrollPane;
-import java.awt.FlowLayout;
-import javax.swing.JCheckBox;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JComboBox;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import net.miginfocom.swing.MigLayout;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Button;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.Dialog.ModalExclusionType;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Formatter;
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Window;
 
-public class login_register {
+import javax.swing.JButton;
 
-	private JFrame frmLibrariesManagmentSystem;
+public class login_register extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -45,8 +32,8 @@ public class login_register {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login_register window = new login_register();
-					window.frmLibrariesManagmentSystem.setVisible(true);
+					login_register frame = new login_register();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,129 +42,63 @@ public class login_register {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public login_register() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+		setResizable(false);
+		setType(Type.UTILITY);
+		setTitle("Log in");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 464, 388);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 102));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		frmLibrariesManagmentSystem = new JFrame();
-		frmLibrariesManagmentSystem.setType(Type.UTILITY);
-		frmLibrariesManagmentSystem.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
-		frmLibrariesManagmentSystem.setTitle("Libraries Managment System");
-		frmLibrariesManagmentSystem.setResizable(false);
-		frmLibrariesManagmentSystem.setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\SOMETHINGS\\icons\\Raindropmemory-Laboratory-Book.ico"));
-		frmLibrariesManagmentSystem.setForeground(new Color(255, 255, 0));
-		frmLibrariesManagmentSystem.getContentPane().setBackground(new Color(0, 0, 102));
-		frmLibrariesManagmentSystem.setBounds(100, 100, 781, 553);
-		frmLibrariesManagmentSystem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		textField = new JTextField();
+		textField.setBounds(135, 87, 171, 22);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(135, 149, 171, 22);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
 		
 		Button button = new Button("Admin");
-		button.setBounds(685, 24, 57, 26);
+		button.setBounds(393, 10, 57, 26);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frmLibrariesManagmentSystem.dispose();
+				//((Window) contentPane).dispose();
 				AdminControl adminp=new AdminControl();
 				adminp.setVisible(true);
+				
 			}
 		});
-		frmLibrariesManagmentSystem.getContentPane().setLayout(null);
+		contentPane.setLayout(null);
 		button.setBackground(new Color(248, 248, 255));
 		button.setForeground(new Color(0, 0, 0));
 		button.setFont(new Font("Ravie", Font.BOLD, 15));
-		frmLibrariesManagmentSystem.getContentPane().add(button);
+		contentPane.add(button);
 		
-		JLabel lblBooks = new JLabel("Books");
-		lblBooks.setBounds(71, 127, 64, 26);
-		lblBooks.setForeground(new Color(255, 255, 0));
-		lblBooks.setFont(new Font("Tahoma", Font.BOLD, 21));
-		frmLibrariesManagmentSystem.getContentPane().add(lblBooks);
+		JLabel lblId = new JLabel("ID :");
+		lblId.setForeground(new Color(255, 255, 255));
+		lblId.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblId.setBackground(new Color(0, 0, 102));
+		lblId.setBounds(139, 58, 56, 16);
+		contentPane.add(lblId);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(253, 132, 250, 22);
-		comboBox.setEditable(true);
-		comboBox.setBackground(new Color(255, 255, 255));
-		frmLibrariesManagmentSystem.getContentPane().add(comboBox);
+		JLabel lblPassword = new JLabel("Password :");
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblPassword.setBackground(new Color(0, 0, 102));
+		lblPassword.setBounds(135, 120, 115, 16);
+		contentPane.add(lblPassword);
 		
-		JButton btnBorrow = new JButton("Borrow");
-		btnBorrow.setBounds(616, 128, 114, 25);
-		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnBorrow.setForeground(new Color(0, 0, 128));
-		frmLibrariesManagmentSystem.getContentPane().add(btnBorrow);
-		
-		JLabel lblJournals = new JLabel("Journals");
-		lblJournals.setBounds(62, 228, 89, 26);
-		lblJournals.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblJournals.setForeground(new Color(255, 255, 0));
-		frmLibrariesManagmentSystem.getContentPane().add(lblJournals);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(253, 233, 250, 22);
-		comboBox_1.setEditable(true);
-		comboBox_1.setBackground(Color.WHITE);
-		frmLibrariesManagmentSystem.getContentPane().add(comboBox_1);
-		
-		JButton button_1 = new JButton("Borrow");
-		button_1.setBounds(616, 232, 114, 25);
-		button_1.setForeground(new Color(0, 0, 128));
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		frmLibrariesManagmentSystem.getContentPane().add(button_1);
-		
-		JLabel lblDigitalMedia = new JLabel("Digital Media");
-		lblDigitalMedia.setBounds(61, 334, 138, 26);
-		lblDigitalMedia.setForeground(new Color(255, 255, 0));
-		lblDigitalMedia.setFont(new Font("Tahoma", Font.BOLD, 21));
-		frmLibrariesManagmentSystem.getContentPane().add(lblDigitalMedia);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(253, 339, 250, 22);
-		comboBox_2.setEditable(true);
-		comboBox_2.setBackground(Color.WHITE);
-		frmLibrariesManagmentSystem.getContentPane().add(comboBox_2);
-		
-		JButton button_2 = new JButton("Borrow");
-		button_2.setBounds(616, 338, 114, 25);
-		button_2.setForeground(new Color(0, 0, 128));
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 13));
-		frmLibrariesManagmentSystem.getContentPane().add(button_2);
-		
-		JButton btnReturnBorrowed = new JButton("Return Borrowed");
-		btnReturnBorrowed.setBounds(39, 440, 175, 27);
-		btnReturnBorrowed.setFont(new Font("Tahoma", Font.BOLD, 15));
-		frmLibrariesManagmentSystem.getContentPane().add(btnReturnBorrowed);
-		
-		JButton btnCheckBalance = new JButton("Check Balance");
-		btnCheckBalance.setBounds(313, 440, 161, 27);
-		btnCheckBalance.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnCheckBalance.setForeground(Color.BLACK);
-		frmLibrariesManagmentSystem.getContentPane().add(btnCheckBalance);
-		
-		JButton btnCheckNotifications = new JButton("Check Notifications");
-		btnCheckNotifications.setBounds(541, 440, 201, 27);
-		btnCheckNotifications.setFont(new Font("Tahoma", Font.BOLD, 15));
-		frmLibrariesManagmentSystem.getContentPane().add(btnCheckNotifications);
-	}
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+		JButton btnNewButton = new JButton("Confirm");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setBounds(162, 207, 108, 25);
+		contentPane.add(btnNewButton);
 	}
 }
