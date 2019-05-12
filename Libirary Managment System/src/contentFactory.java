@@ -25,9 +25,72 @@ abstract class Content {
 	private  State state ;
 	private List<Subscriber> Subscribers = new ArrayList<Subscriber>();
 	
-	public String title ,author,Publisher,category,id, libID , ProductionYear;
-	public  int  copies;
-	
+	private String title ,author,Publisher,category,id, libID , ProductionYear;
+	private  int  copies;
+	public void setTitle(String t)
+	{
+		title = t;
+	}
+	public String getTitle()
+	{
+		return title;
+	}
+	public void setAuthor(String a)
+	{
+		author = a;
+	}
+	public String getAuthor()
+	{
+		return author;
+	}
+	public void setPub(String Pub)
+	{
+		Publisher = Pub;
+	}
+	public String getPub()
+	{
+		return Publisher;
+	}
+	public void SetCat(String Cat)
+	{
+		category = Cat;
+	}
+	public String getCat()
+	{
+		return category;
+	}
+	public void setID(String Id)
+	{
+		id =Id;
+	}
+	public String getID()
+	{
+		return id;
+	}
+	public void setlibID(String LibID)
+	{
+		libID = LibID;
+	}
+	public String getLibID()
+	{
+		return libID;
+	}
+	public void SetPYear (String Pyear)
+	{
+		ProductionYear = Pyear;
+	}
+	public String getPyear()
+	{
+		return ProductionYear;
+	}
+	public void setCopies (int C)
+	{
+		copies = C;
+	}
+	public int getCopies()
+	{
+		return copies;
+	}
 	//for state pattern
 	public   Content () {
 		state = null;
@@ -36,6 +99,7 @@ abstract class Content {
 		
 		return state;
 	}
+	
 	public void setState (State state) 
 	{
 		this.state = state;

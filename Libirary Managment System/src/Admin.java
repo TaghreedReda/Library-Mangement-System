@@ -1,17 +1,15 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.io.File; 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-
- 
+import java.util.Date;
 
 public class Admin {
 	public String Username;
 	private String Password ;
 	
-    ContentFactory contentFactory = new ContentFactory();
+	static Data dataObj = new Data ();
+	Subscriber subscriber;
+	ContentFactory contentFactory = new ContentFactory();
     Content content;
+    Library library;
+    BorrowingRecord  borrowingRecord ;
     
     public void addContent(String contID,String category,String title ,String author, String Publisher,String libID ,
     		String ProductionYear ,String copies) 
@@ -29,156 +27,155 @@ public class Admin {
 		{
 			 content = contentFactory.getContent("Digital Media");
 		}
-		content.author=author;  
-		content.Publisher=Publisher; content.libID=libID; content.ProductionYear=ProductionYear;
-		content.copies=Integer.parseInt(copies); content.id=contID;
+		content.setAuthor(author);  
+		content.setPub(Publisher); 
+		content.setlibID(libID);
+		content.SetPYear(ProductionYear);
+		content.setCopies(Integer.parseInt(copies)); 
+		content.setID(contID);
 		
-		if(content.copies>0) {
+		if(content.getCopies()>0) {
 			OnShelf onshelf = new OnShelf();
 			onshelf.doAction(content);	
 		}
-		else if (content.copies==0) {
+		else if (content.getCopies()==0) {
 			Borrowed borrowed = new Borrowed();
 			borrowed.doAction(content);	
 		}
-		
-
-		
-		
-		// hy3ml add fl file hna l kol attributes bta3t el content 
+		Data.Items.add(content);
 		
 	}
 	public void editContent(String contID,String category,String title ,String author, String Publisher,String libID ,
 			String ProductionYear ,String copies)
 	{
-		//bdal da hyb2a nfs el logic lakn  f file
-		 /*
-		for(Library lib : libraries)
-		{
-			if(lib.ID==libID) 
-			{
-				for (Content cont : lib.libraryContents) 
+				for (Content cont : Data.Items) 
 				{
-					if (cont.id==contID) {
+					if (cont.getID()==contID) {
 						
-						content.author=author;  
-						content.Publisher=Publisher; 
-						content.libID=libID; 
-						content.ProductionYear=ProductionYear;
-						content.copies=Integer.parseInt(copies);
-						
-						// hna zy ma dwrna fl list hndwar fl files bl id bardo w n-update
+						content.setAuthor(author);  
+						content.setPub(Publisher); 
+						content.setlibID(libID);
+						content.SetPYear(ProductionYear);
+						content.setCopies(Integer.parseInt(copies)); 
+						content.setID(contID);					
 					}
 				}
 				  
-			}
-		}
-		*/
 	}
-	
 	public  void removeContent(String libID , String contentID) 
 	{
-		
-		//bdal da hyb2a nfs el logic lakn  f file
-		 /*
-		for(Library lib : libraries)
-		{
-			if(lib.ID==libID) 
-			{
-				for (Content cont : lib.libraryContents) 
+				for (Content cont :Data.Items) 
 				{
-					if (cont.id==contentID) {
-						lib.libraryContents.remove(cont);
+					if (cont.getID()==contentID) {
+						Data.Items.remove(cont);
 					}
-				}
-				  
-			}
-		}*/
-		
+				}	
 	}
 	
 	public void addLibrary(String id , String name , String address) 
 	{
-		Library library=new Library();
-		library.address=address; library.name=name; library.ID=id;
-		
-		//bdal da hyb2a nfs el logic lakn  f file
-		//libraries.add(library);
-		
+		 library=new Library();
+		library.setAddress( address); library.setname(name); library.setID(id);
+		Data.libraries.add(library);		
 	}
 	
 	public void removeLibrary(String id) 
 	{
-		//bdal da hyb2a nfs el logic lakn  f file
-		 /*
-		for(Library lib : libraries)
+		
+		for(Library lib : Data.libraries)
 		{
-			if(lib.ID==id) 
+			if(lib.getID()==id) 
 			{
-				libraries.remove(lib);
+				Data.libraries.remove(lib);
 			}
 		}
-		*/
+		
 	}
 	
 public void editLibrary(String id , String name , String address){
-		//bdal da hyb2a nfs el logic lakn  f file
-		 /*
-		for(Library lib : libraries)
+		
+	for(Library lib : Data.libraries)
+	{
+		if(lib.getID()==id) 
 		{
-			if(lib.ID==id) 
-			{
-				lib.address=address; lib.name=name;
-			}
+			lib.setAddress( address); lib.setname(name); lib.setID(id);
 		}
-		*/
 	}	
-	
+}
+
 public void addSubscriber(String address,String phone,String email,String ID,String balance,String type) {
-		Subscriber subscriber;
+		
 		if(type=="Golden") {
-			subscriber=  new GoldenSubscriber();
+			subscriber=new GoldenSubscriber();
 				
 		}
 		else { 
-			subscriber=  new RegularSubscriber();
+			subscriber=new RegularSubscriber();
 		}
-		subscriber.address=address;
-		subscriber.phone=phone;
-		subscriber.email=email;
-		subscriber.ID=ID;
-		subscriber.balance=Integer.parseInt(balance);	
+		subscriber.setAddress(address);
+		subscriber.setPhone(phone);
+		subscriber.setEmail(email);
+		subscriber.setID(ID);
+		subscriber.setBalance(Integer.parseInt(balance));
+		
+		Data.Subs.add(subscriber);
+		
 	}
 	public void removeSubscriber(String ID) {
-		//bdal da hyb2a nfs el logic lakn  f file
-		 /*
-		for(Subscribers sub : Subscribers )
+		
+		for(Subscriber sub : Data.Subs )
 		{
-			if(sub.ID==id) 
+			if(sub.getID()==ID) 
 			{
-				Subscribers.remove(sub);
+				Data.Subs.remove(sub);
 			}
 		}
-		*/
+		
 	}
 	public void editSubscriber(String address,String phone,String email,String ID,String balance,String type){
-		
-		//bdal da hyb2a nfs el logic lakn  f file
-		 /*
-		for(Subscribers sub : Subscribers )
+		for(Subscriber subscriber : Data.Subs )
 		{
-			if(sub.ID==id) 
+			if(subscriber.getID()==ID) 
 			{
-				sub.address=address; sub.name=name; .... etc
+				subscriber.setAddress(address);
+		subscriber.setPhone(phone);
+		subscriber.setEmail(email);
+		subscriber.setID(ID);
+		subscriber.setBalance(Integer.parseInt(balance));
 			}
 		}
-		*/
-	}
-	public void addBorrowingRec(int SubscriberID ,int ContentID,int fee) {
-		
-	}
-	public void removeBorrowingRec() {}
-	public void editBorrowingRec(){}
 
+	}
+	
+	public void addBorrowingRec(String SubscriberID ,String ContentID,int fee,Date b_date, Date r_date) {
+		 
+		  borrowingRecord =new BorrowingRecord();
+		  borrowingRecord.setborrowDate(b_date);
+		  borrowingRecord.setContentID(ContentID);
+		  borrowingRecord.setFee(fee);
+		  borrowingRecord.setreturnDate(r_date);
+		  borrowingRecord.setSubscriberID(SubscriberID);
+		  
+			Data.BorrowedContents.add(borrowingRecord);		
+	}
+	public void removeBorrowingRec(String SubscriberID ,String ContentID) {
+		for (BorrowingRecord  borrowingRecord :Data.BorrowedContents ) {
+			if (borrowingRecord.getSubscriberID()== SubscriberID && borrowingRecord.getContentID()==ContentID) {
+				Data.BorrowedContents.remove(borrowingRecord);
+			}
+		}
+	}
+	public void editBorrowingRec(String SubscriberID ,String ContentID,int fee,Date b_date, Date r_date){
+		for (BorrowingRecord  borrowingRecord :Data.BorrowedContents ) {
+			if (borrowingRecord.getSubscriberID()== SubscriberID && borrowingRecord.getContentID()==ContentID) {
+				borrowingRecord =new BorrowingRecord();
+				  borrowingRecord.setborrowDate(b_date);
+				  borrowingRecord.setContentID(ContentID);
+				  borrowingRecord.setFee(fee);
+				  borrowingRecord.setreturnDate(r_date);
+				  borrowingRecord.setSubscriberID(SubscriberID);
+			}
+	}
 
+	}
 }

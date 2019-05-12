@@ -1,42 +1,80 @@
 //import java.sql.Date;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BorrowingRecord {
     
-	Subscriber subscriber ;
-	public String  ContentID,SubscriberID;
-	int fee;
-	public Date borrowDate ,returnDate;
-	String Borrow_Date,Return_Date;
+	static Data dataObj = new Data ();
+	private String  ContentID,SubscriberID;
+	 private int fee;
 	
-	// public int calculateFee (String subID , String Borrow_Date, String Return_Date)
-    public void calculateFee (String  subscriberID) 
-    {
-    	//haydwar fl file 3al id w ygeeb el type wl borrow date wl return date as strings 
+	private Date returnDate,borrowDate;
+	
+	
+	
+	public void setborrowDate (Date b ) {
+		b=borrowDate;
+	}
+    public Date getborrowDate () {
+		
+	return borrowDate;
+	}
+    public void setreturnDate (Date b ) {
+		b=returnDate;
+	}
+    public Date getreturnDate () {
+		
+	return returnDate;
+	}
+	
+	 String getContentID() {
+		return ContentID;
+	}
+	public void setContentID(String contentID) {
+		ContentID = contentID;
+	}
+	
+	 String getSubscriberID() {
+		return SubscriberID;
+	}
+
+	 public void setSubscriberID(String subscriberID) {
+		SubscriberID = subscriberID;
+	}
+	 
+    public void calculateFee (String  subscriberID , Date borrowDate,Date returnDate ) throws ParseException {
+      	
     	
-    	// hna h2ra el dates as strings mn el files w a7otha fl strings ely 3ndy dol 
+    	Subscriber subscriber = null ;
     	
-    
-    	//this.borrowDate= new SimpleDateFormat("dd/MM/yyyy").parse(Borrow_Date);
-    //	this.returnDate= new SimpleDateFormat("dd/MM/yyyy").parse(Return_Date);
+    	for(Subscriber sub : Data.Subs )
+		{
+			if(sub.getID()== subscriberID) 
+			{
+				if (sub.getType()=="Golden") {
+					subscriber = new GoldenSubscriber();
+				}
+				else 
+					subscriber = new RegularSubscriber();
+			}
+		}
     	
-    	long diff = this.returnDate.getTime()- this.borrowDate.getTime();
-    	
-    	long diffDays = diff / (24 * 60 * 60 * 1000);
-        
-    	if (subscriber.getType()=="Golden") {
-    		if (diffDays>90) {
-    			this.fee=30;
-    			subscriber.fee+=30;
-    		}
-    	}
-    	else if (subscriber.getType()=="Regular") {
-    		if (diffDays>21) {
-    			this.fee=50;
-    			subscriber.fee+=50;
-    		}
-    	}	
+    	 subscriber.CalculateFees(borrowDate, returnDate);
     }
+	/**
+	 * @return the fee
+	 */
+	public int getFee() {
+		return fee;
+	}
+	/**
+	 * @param fee the fee to set
+	 */
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
+	
+
 }

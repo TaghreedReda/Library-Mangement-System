@@ -1,0 +1,13 @@
+1,111,Journal,al masry elyoum,mohamed el sayed saleh,mahmoud amin,2019,OnShelf,50
+2,222,Book,The Science of Evil: On Empathy and the Origins of Cruelty,Simon Baron-Cohen,Basic Books,2011,Borrowed,0
+3,555,Book,The Fault in Our Stars,John Green,Dutton Books,2012,OnShelf,14
+4,111,Book,The Subtle Art of Not Giving a F*ck,Mark Manson,HarperOne,2016,Borrowed,0
+5,555,Digital Media,the lord of the rings,Peter Jackson,peter jackson,2002,OnShelf,1
+6,333,Digital Media,harry potter,J. K. Rowling,David Heyman,2001,Borrowed,0
+7,222,Book,Death by Black Hole,Neil deGrasse Tyson,W. W. Norton & Company,2006,Borrowed,0
+8,333,Book,A Brief History of Time,Stephen Hawking,Bantam Books,1988,OnShelf,5
+9,444,Digital Media,Avengers: Endgame,Joe Russo,Kevin Feige,2019,Borrowed,0
+10,444,Book,The Power of Habit,Charles Duhigg,Random House,2012,OnShelf,5
+11,333,Book,The Paradox of Choice,Barry Schwartz,Harper Perennial,2004,Borrowed,0
+12,111,Digital Media,Logan,James Mangold,simon kinberg,2017,Borrowed,0
+13,222,Journal,Al-Ahram,Mohamed Abdelhady Allam,Al-Ahram Publishing House,2019,OnShelf,3

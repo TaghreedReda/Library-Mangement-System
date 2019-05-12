@@ -1,0 +1,15 @@
+1.0,Golden,Jadyn Perry,246,(422) 314-0843,pizza@comcast.net,260  Duncan Avenue Ohio,15,100,13,1 2 4 9
+2.0,Regular,Elena Lane,456,(587) 487-6040,monkeydo@aol.com,3606  Petunia Way Iowa,22,200,13,2 8
+3.0,Golden,Kimberly Barker,774,(664) 696-5559,moonlapse@optonline.net,1211  Hanifan Lane New Mexico,30,300,1,3 6 4
+4.0,Regular,Sydnee Guzman,855,(642) 688-5096,dodong@live.com,1416  Shadowmar Drive Louisiana,14,48,8,4 7 9 11
+5.0,Regular,Marcos Jacobs,459,(498) 473-9900,shazow@aol.com,4006  Hayhurst Lane Michigan,10,100,6,4 11 13
+6.0,Regular,Natasha Vega,123,(511) 703-0395,louise@optonline.net,872  Michigan Avenue Pennsylvania,13,55,4,1
+7.0,Golden,Sylvia Small,235,(349) 959-6044,whimsy@aol.com,1798  Rebecca Street Iowa,25,70,10,5 8 9
+8.0,Regular,Amy Miller,489,(933) 823-9977,oracle@att.net,903  Perine Street Virginia,25,60,11,4 6 1
+9.0,Regular,Peter Parker,786,(538) 554-0532,fraterk@comcast.net,4596  Abia Martin Drive New York,100,400,11,2 7 12
+10.0,Golden,Macey Schwartz,333,(823) 869-0459,dmiller@yahoo.com,4290  Filbert Street Pennsylvania,55,700,13,11 10 4
+11.0,Regular,Lee Ray,000,(668) 329-0788,qmacro@yahoo.ca,3408  Water Street Louisiana,89,100,7,1 5 4 9 6
+12.0,Golden,Cesar Harrell,471,(880) 544-8563,curly@hotmail.com,3647  Ripple Street Michigan,45,99,9,10
+13.0,Golden,Camila Andrews,852,(727) 707-1455,fisher@msn.com,3763  Deercove Drive Texas,31.5,200,10,7
+14.0,Regular,Trey Hinton,963,(688) 253-1957,monkeydo@comcast.net,4976  Copperhead Road Connecticut,47,300,8,1
+15.0,Golden,ramses hilton,357,(724) 335-3182,habood@hotmail.com,2417  Grant Street Texas,80,800,2,9 8 2
