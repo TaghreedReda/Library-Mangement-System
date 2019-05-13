@@ -1,15 +1,25 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Admin {
 	public String Username;
 	private String Password ;
 	
-	static Data dataObj = new Data ();
+	Data  data = Data.getInstance();
+
+	//static data dataObj = new data ();
 	Subscriber subscriber;
 	ContentFactory contentFactory = new ContentFactory();
     Content content;
     Library library;
     BorrowingRecord  borrowingRecord ;
+    
+    Date change ( String bDate) throws ParseException {
+		Date b_date;
+		b_date=new SimpleDateFormat("dd/MM/yyyy").parse( bDate);
+		return b_date;
+	}
     
     public void addContent(String contID,String category,String title ,String author, String Publisher,String libID ,
     		String ProductionYear ,String copies) 
@@ -42,13 +52,13 @@ public class Admin {
 			Borrowed borrowed = new Borrowed();
 			borrowed.doAction(content);	
 		}
-		Data.Items.add(content);
+		data.Items.add(content);
 		
 	}
 	public void editContent(String contID,String category,String title ,String author, String Publisher,String libID ,
 			String ProductionYear ,String copies)
 	{
-				for (Content cont : Data.Items) 
+				for (Content cont : data.Items) 
 				{
 					if (cont.getID()==contID) {
 						
@@ -64,10 +74,10 @@ public class Admin {
 	}
 	public  void removeContent(String libID , String contentID) 
 	{
-				for (Content cont :Data.Items) 
+				for (Content cont :data.Items) 
 				{
 					if (cont.getID()==contentID) {
-						Data.Items.remove(cont);
+						data.Items.remove(cont);
 					}
 				}	
 	}
@@ -76,17 +86,17 @@ public class Admin {
 	{
 		 library=new Library();
 		library.setAddress( address); library.setname(name); library.setID(id);
-		Data.libraries.add(library);		
+		data.libraries.add(library);		
 	}
 	
 	public void removeLibrary(String id) 
 	{
 		
-		for(Library lib : Data.libraries)
+		for(Library lib : data.libraries)
 		{
 			if(lib.getID()==id) 
 			{
-				Data.libraries.remove(lib);
+				data.libraries.remove(lib);
 			}
 		}
 		
@@ -94,7 +104,7 @@ public class Admin {
 	
 public void editLibrary(String id , String name , String address){
 		
-	for(Library lib : Data.libraries)
+	for(Library lib : data.libraries)
 	{
 		if(lib.getID()==id) 
 		{
@@ -118,22 +128,22 @@ public void addSubscriber(String address,String phone,String email,String ID,Str
 		subscriber.setID(ID);
 		subscriber.setBalance(Integer.parseInt(balance));
 		
-		Data.Subs.add(subscriber);
+		data.Subs.add(subscriber);
 		
 	}
 	public void removeSubscriber(String ID) {
 		
-		for(Subscriber sub : Data.Subs )
+		for(Subscriber sub : data.Subs )
 		{
 			if(sub.getID()==ID) 
 			{
-				Data.Subs.remove(sub);
+				data.Subs.remove(sub);
 			}
 		}
 		
 	}
 	public void editSubscriber(String address,String phone,String email,String ID,String balance,String type){
-		for(Subscriber subscriber : Data.Subs )
+		for(Subscriber subscriber : data.Subs )
 		{
 			if(subscriber.getID()==ID) 
 			{
@@ -156,17 +166,17 @@ public void addSubscriber(String address,String phone,String email,String ID,Str
 		  borrowingRecord.setreturnDate(r_date);
 		  borrowingRecord.setSubscriberID(SubscriberID);
 		  
-			Data.BorrowedContents.add(borrowingRecord);		
+			data.BorrowedContents.add(borrowingRecord);		
 	}
 	public void removeBorrowingRec(String SubscriberID ,String ContentID) {
-		for (BorrowingRecord  borrowingRecord :Data.BorrowedContents ) {
+		for (BorrowingRecord  borrowingRecord :data.BorrowedContents ) {
 			if (borrowingRecord.getSubscriberID()== SubscriberID && borrowingRecord.getContentID()==ContentID) {
-				Data.BorrowedContents.remove(borrowingRecord);
+				data.BorrowedContents.remove(borrowingRecord);
 			}
 		}
 	}
 	public void editBorrowingRec(String SubscriberID ,String ContentID,int fee,Date b_date, Date r_date){
-		for (BorrowingRecord  borrowingRecord :Data.BorrowedContents ) {
+		for (BorrowingRecord  borrowingRecord :data.BorrowedContents ) {
 			if (borrowingRecord.getSubscriberID()== SubscriberID && borrowingRecord.getContentID()==ContentID) {
 				borrowingRecord =new BorrowingRecord();
 				  borrowingRecord.setborrowDate(b_date);

@@ -91,6 +91,10 @@ abstract class Content {
 	{
 		return copies;
 	}
+	public String getScopies() {
+		String Scopies = String.valueOf(getCopies());
+    	return Scopies;
+	}
 	//for state pattern
 	public   Content () {
 		state = null;

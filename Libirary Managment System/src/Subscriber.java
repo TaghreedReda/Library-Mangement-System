@@ -1,13 +1,36 @@
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public  abstract class Subscriber
 {
-	Content content;
+	//for observer pattern
+	protected Content content;
+	
 	BorrowingRecord borrowingRecord;
-   static Data obj = new Data ();
-	protected static  int  fee=0;
+  Data  data = Data.getInstance();
+   String [] Notifications ; 
+	
+   private String Password ;
+    protected static  int  fee=0;
 	private int balance;
+	private String CurrentContent,address,phone,name,email,ID ;
+	
+	public void setNotifications(String [] wl)
+	{
+		Notifications = wl;
+	}
+	public  String [] getNotifications()
+	{
+		return Notifications;
+	}
+	public String getCurrentContent() {
+		return CurrentContent;
+	}
+	
+	public void setCurrentContent(String currentContent) {
+		CurrentContent = currentContent;
+	}
 	public int getFee() 
 	{
 		return fee;
@@ -16,26 +39,54 @@ public  abstract class Subscriber
 	{
 		Subscriber.fee = fee;
 	}
-    private String address,phone,name,email,ID ;
-	//private String Password ;
+    public String getSfee() {
+    	
+    	String Sfee = String.valueOf(getFee());
+    	return Sfee;
+    }
+   
+ public String getSbalance() {
+    	
+    	String Sbalance = String.valueOf(checkBalance());
+    	return Sbalance;
+    }
+   
+
 	
-	public void browse() 
-	{
-		
-	}
 	public void setID(String id)
 	{
 		ID=id;
 	}
+	public String getID()
+	{
+		return ID;
+	}
+
 	public void setName(String Name)
 	{
 		name = Name;
 	}
-	public void setPhone(String Phone)
+	public String getName()
+	{
+		return name;
+	}
+	
+public void setPhone(String Phone)
 	{
 		phone = Phone;
 	}
-	public void setAddress(String Address)
+
+public String getPhone()
+{
+	return phone;
+}
+
+public String getAddress()
+	{
+		return address;
+	}
+	
+public void setAddress(String Address)
 	{
 		address = Address;
 	}
@@ -48,23 +99,6 @@ public  abstract class Subscriber
 	{
 		return email;
 	}
-	public String getName()
-	{
-		return name;
-	}
-	public String getAddress()
-	{
-		return address;
-	}
-	public String getID()
-	{
-		return ID;
-	}
-	public String getPhone()
-	{
-		return phone;
-	}
-	
 	
 	public  void borrowContent(String contID ) 
 	{ 
@@ -76,7 +110,7 @@ public  abstract class Subscriber
 		 
 		 borrowingRecord.setborrowDate((java.sql.Date) new Date());
 		 
-		for (Content content : Data.Items ) {
+		for (Content content : data.Items ) {
 			if (content.getID() == contID)
 				content.setCopies(content.getCopies()-1);
 			if(content.getCopies() == 0)
@@ -85,17 +119,17 @@ public  abstract class Subscriber
 				content.setState(s);
 			}
 		}
-		Data.BorrowedContents.add(borrowingRecord);
+		data.BorrowedContents.add(borrowingRecord);
 	}
 		
 		public void returnContent(String contId) throws ParseException 
 		{
 			
-			for (BorrowingRecord borrowingRecord :Data.BorrowedContents ) {
+			for (BorrowingRecord borrowingRecord :data.BorrowedContents ) {
 				if (borrowingRecord.getContentID()==contId && borrowingRecord.getSubscriberID()==this.getID()) {
 					borrowingRecord.setreturnDate( (java.sql.Date) new Date());
 					
-					for (Content content : Data.Items ) {
+					for (Content content : data.Items ) {
 						if (content.getID() == contId) 
 				{
 					content.setCopies(content.getCopies()+1);
@@ -108,6 +142,7 @@ public  abstract class Subscriber
 			}
 			}
 			}	
+			this.setCurrentContent("0");		
 		}
 		
 		public long checkBalance() 
@@ -124,7 +159,9 @@ public  abstract class Subscriber
 		// for observer pattern
 		public void update () 
 		{
-			
+			 String r= ("Item : "+content.getTitle()+ " ID " +content.getID()+" is Onshelf now again" );
+	    this.Notifications[this.Notifications.length-1]=r;
+			 
 		}
 		
 	    public void PayFees () 
@@ -135,6 +172,16 @@ public  abstract class Subscriber
 		}
 		
 	    public abstract int CalculateFees(Date borrowDate, Date returnDate) throws ParseException;
+	
+		public String getPassword() {
+			return Password;
+		}
+	
+		public void setPassword(String password) {
+			Password = password;
+		}
+		
+		
 		
 	}
 
@@ -151,18 +198,11 @@ public  abstract class Subscriber
 			this.content = content;
 		      this.content.attach(this);	
 		}
-		
-		
+			
 		 @Override
 		public String getType() 
 		{
 			return "Golden";
-		}
-		 @Override
-		// for observer pattern
-		public void update ()
-		{
-			 content.getState();
 		}
 
 	@Override
@@ -203,12 +243,6 @@ public  abstract class Subscriber
 		public String getType() 
 		{
 			return "Regular";
-		}
-		 @Override
-		// for observer pattern
-		public void update ()
-		{
-			 content.getState();
 		}
 		 
 		@Override

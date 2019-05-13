@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Formatter;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -20,7 +21,8 @@ import java.awt.Window;
 import javax.swing.JButton;
 
 public class login_register extends JFrame {
-
+	public static String subid;
+	Data  data = Data.getInstance();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -71,6 +73,11 @@ public class login_register extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//((Window) contentPane).dispose();
+				data.fillBorrowing();
+				data.FillContent();
+				data.fillLibraries();
+				data.fillSubscribers();
+
 				AdminControl adminp=new AdminControl();
 				adminp.setVisible(true);
 				
@@ -97,6 +104,18 @@ public class login_register extends JFrame {
 		contentPane.add(lblPassword);
 		
 		JButton btnNewButton = new JButton("Confirm");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				data.fillBorrowing();
+				data.FillContent();
+				data.fillLibraries();
+				data.fillSubscribers();
+				subid=textField.getText();
+				SubscriberTab s=new SubscriberTab();
+				 s.frmLibrariesManagmentSystem.setVisible(true);
+				//open sub tab
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnNewButton.setBounds(162, 207, 108, 25);
 		contentPane.add(btnNewButton);

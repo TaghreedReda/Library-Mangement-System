@@ -6,23 +6,27 @@ import java.util.Date;
 
 public class BorrowingRecord {
     
-	static Data dataObj = new Data ();
+	Data  data = Data.getInstance();
 	private String  ContentID,SubscriberID;
 	 private int fee;
 	
 	private Date returnDate,borrowDate;
 	
 	
-	
-	public void setborrowDate (Date b ) {
-		b=borrowDate;
+public String getSfee() {
+    	
+    	String Sfee = String.valueOf(getFee());
+    	return Sfee;
+    }
+	public void setborrowDate (Date  b ) {
+	borrowDate=b;
 	}
     public Date getborrowDate () {
 		
 	return borrowDate;
 	}
-    public void setreturnDate (Date b ) {
-		b=returnDate;
+    public void setreturnDate (Date a ) {
+    	returnDate=a;
 	}
     public Date getreturnDate () {
 		
@@ -49,7 +53,7 @@ public class BorrowingRecord {
     	
     	Subscriber subscriber = null ;
     	
-    	for(Subscriber sub : Data.Subs )
+    	for(Subscriber sub : data.Subs )
 		{
 			if(sub.getID()== subscriberID) 
 			{

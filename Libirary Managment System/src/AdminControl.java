@@ -1,6 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,23 +13,15 @@ import java.awt.Font;
 import java.awt.Window.Type;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 
 public class AdminControl extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField libAddF;
-	private JTextField brSUBid;
-	private JTextField brItemID;
-	private JTextField fee;
-	private JTextField brDate;
-	private JTextField retDate;
-	private JTextField subBalance;
 
-	/**
-	 * Launch the application.
-	 */
+	Data  data = Data.getInstance();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -62,7 +54,7 @@ public class AdminControl extends JFrame {
 		 contentPane.setLayout(null);
 		
 		JLabel label = new JLabel("Subscriber");
-		label.setBounds(34, 13, 133, 21);
+		label.setBounds(34, 13, 105, 21);
 		label.setForeground(Color.YELLOW);
 		label.setFont(new Font("Tahoma", Font.BOLD, 17));
 		contentPane.add(label);
@@ -158,12 +150,8 @@ public class AdminControl extends JFrame {
 		contentPane.add(rdbtnRemove);
 		
 		 JButton btnDone = new JButton("Done");
-		 btnDone.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent e) {
-		 	}
-		 });
 		
-		btnDone.setBounds(241, 480, 105, 25);
+		btnDone.setBounds(309, 480, 105, 25);
 		btnDone.setFont(new Font("Tahoma", Font.BOLD, 13));
 		contentPane.add(btnDone);
 		
@@ -293,24 +281,13 @@ JComboBox comboBox = new JComboBox();
 		comboBox_1.setBounds(24, 167, 133, 22);
 		contentPane.add(comboBox_1);
 		
-		JButton back = new JButton("Back");
-		back.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		back.setFont(new Font("Tahoma", Font.BOLD, 13));
-		back.setBounds(376, 480, 105, 25);
-		contentPane.add(back);
-		
 		JLabel libAdd = new JLabel("Address :");
 		libAdd.setForeground(Color.WHITE);
 		libAdd.setFont(new Font("Tahoma", Font.BOLD, 13));
 		libAdd.setBounds(560, 143, 75, 16);
 		contentPane.add(libAdd);
 		
-		libAddF = new JTextField();
+		JTextField libAddF = new JTextField();
 		libAddF.setColumns(10);
 		libAddF.setBounds(560, 167, 116, 22);
 		contentPane.add(libAddF);
@@ -336,10 +313,10 @@ JComboBox comboBox = new JComboBox();
 		lblBorrowingRecord.setBounds(512, 202, 162, 21);
 		contentPane.add(lblBorrowingRecord);
 		
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setBackground(new Color(0, 0, 102));
-		checkBox.setBounds(682, 202, 25, 25);
-		contentPane.add(checkBox);
+		JCheckBox borrB = new JCheckBox("");
+		borrB.setBackground(new Color(0, 0, 102));
+		borrB.setBounds(682, 202, 25, 25);
+		contentPane.add(borrB);
 		
 		JLabel lblSubscriberId = new JLabel("Subscriber ID :");
 		lblSubscriberId.setForeground(Color.WHITE);
@@ -363,6 +340,7 @@ JComboBox comboBox = new JComboBox();
 		brItemID.setBounds(558, 304, 118, 22);
 		contentPane.add(brItemID);
 		
+
 		JLabel lblFee = new JLabel("Fee :");
 		lblFee.setForeground(Color.WHITE);
 		lblFee.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -379,6 +357,7 @@ JComboBox comboBox = new JComboBox();
 		lblBorrowingDate.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblBorrowingDate.setBounds(560, 371, 116, 16);
 		contentPane.add(lblBorrowingDate);
+		
 		
 		JTextField brDate = new JTextField();
 		brDate.setColumns(10);
@@ -412,6 +391,10 @@ JComboBox comboBox = new JComboBox();
 		String type =comboBox_1.getSelectedItem().toString();
 		BorrowingRecord borrowingRec =new BorrowingRecord();
 		
+		
+			
+
+		
 		rdbtnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 	    		rdbtnEdit.setEnabled(false);
@@ -433,10 +416,15 @@ JComboBox comboBox = new JComboBox();
 	    		
 	    	}
 	    });
-			 btnDone.addActionListener(new ActionListener() {
+		
+		
+			 btnDone.addActionListener(new ActionListener() 
+			 {
+				 
 			 	public void actionPerformed(ActionEvent e) {
 			 		if (rdbtnAdd.isSelected()) {
 			 			if(LibCB.isSelected()) {
+			 				
 			 			admin.addLibrary(IDlibField.getText(),namelibField.getText(), libAddF.getText());
 			 			}
 			 			if(ContCB.isSelected()) {
@@ -446,9 +434,20 @@ JComboBox comboBox = new JComboBox();
 			 			if (subCB.isSelected()) {
 			 				admin.addSubscriber(subadd.getText(), subphone.getText(), subemail.getText(), subID.getText(), subBalance.getText(), type);
 			 			}
+			 			if(borrB.isSelected()) {
+			 				try {
+								admin.addBorrowingRec(brSUBid.getText(), brItemID.getText(), Integer.valueOf(fee.getText()), admin.change(brDate.getText()), admin.change(retDate.getText()));
+							} catch (NumberFormatException | ParseException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+			 			}
+			 			
 			 		}
-			 		else if (rdbtnRemove.isSelected()) {
-			 			if(LibCB.isSelected()) {
+			 		
+			 		else if (rdbtnRemove.isSelected()) 
+			 		{
+			 			    if(LibCB.isSelected()) {
 				 			admin.removeLibrary(IDlibField.getText());
 				 			}
 				 			if(ContCB.isSelected()) {
@@ -457,10 +456,15 @@ JComboBox comboBox = new JComboBox();
 				 			if (subCB.isSelected()) {
 				 				admin.removeSubscriber(subID.getText());
 				 			}
+				 			if(borrB.isSelected()) {
+				 				admin.removeBorrowingRec(brSUBid.getText(), contIDField.getText());
+				 			}
 			 		}
 			 		
-			 		else if (rdbtnEdit.isSelected()) {
-			 			if(LibCB.isSelected()) {
+			 		else if (rdbtnEdit.isSelected()) 
+			 		{
+			 			
+			 			    if(LibCB.isSelected()) {
 				 			admin.editLibrary(IDlibField.getText(),namelibField.getText(), libAddF.getText());
 				 			}
 				 			if(ContCB.isSelected()) {
@@ -470,14 +474,21 @@ JComboBox comboBox = new JComboBox();
 				 			if (subCB.isSelected()) {
 				 				admin.editSubscriber(subadd.getText(), subphone.getText(), subemail.getText(), subID.getText(), subBalance.getText(), type);
 				 			}
+				 			if(borrB.isSelected()) {
+				 				
+				 				try {
+									admin.editBorrowingRec(brSUBid.getText(), contIDField.getText(),Integer.valueOf(fee.getText()), admin.change(brDate.getText()), admin.change(retDate.getText()));
+								} catch (NumberFormatException | ParseException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+				 			}
 			 		}
 			 		
-			 		/*try {
-						borrowingRec.calculateFee(brSUBid.getText(), brDate.getText() ,retDate.getText());
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}*/
+			 		data.WriteBorrowing();
+			 		data.WriteContent();
+			 		data.WriteLibraries();
+			 		data.WriteSubscribers();
 			 	}
 			 });
 	}
